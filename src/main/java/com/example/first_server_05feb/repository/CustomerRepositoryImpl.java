@@ -1,9 +1,15 @@
 package com.example.first_server_05feb.repository;
 
 import com.example.first_server_05feb.model.Customer;
+import com.example.first_server_05feb.repository.mapper.CustomerMapper;
+import com.example.first_server_05feb.repository.mapper.StudentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class CustomerRepositoryImpl implements CustomerRepository{
@@ -38,6 +44,42 @@ public class CustomerRepositoryImpl implements CustomerRepository{
                             customer.getEmail(),
                             customer.getId());
     }
+
+
+    @Override
+    public List<Customer> getAllCustomers() {
+        String sql = String.format("SELECT * FROM %s",CUSTOMER_TABLE_NAME);
+        try{
+            return jdbcTemplate.query(sql,new CustomerMapper());
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
+    @Override
+    public List<Customer> getCustomerByName(String name) {
+        String sql = String.format("SELECT * FROM %s WHERE first_name = ?",CUSTOMER_TABLE_NAME);
+        try{
+            return jdbcTemplate.query(sql,new CustomerMapper(),name);
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
+    @Override
+    public Customer getCustomerById(int id) {
+        String sql = String.format("SELECT * FROM %s WHERE id = ?",CUSTOMER_TABLE_NAME);
+        try{
+            Customer customer = jdbcTemplate.queryForObject(sql,new CustomerMapper(),id);
+            return customer;
+//        return jdbcTemplate.queryForObject(sql,new CustomerMapper(),id);
+        }catch (EmptyResultDataAccessException e){
+            System.out.println("No result");
+            return null;
+        }
+    }
+
+
 
 
 }

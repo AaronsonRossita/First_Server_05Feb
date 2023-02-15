@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS customer_order;
 DROP TABLE IF EXISTS customer;
+DROP TABLE IF EXISTS student;
 
 CREATE TABLE customer(
     id int NOT NULL AUTO_INCREMENT,
@@ -25,6 +26,17 @@ CREATE TABLE student(
     email varchar(300) NOT NULL DEFAULT '',
     PRIMARY KEY (id)
 );
+
+INSERT INTO customer (first_name, last_name, email)
+VALUES ('a','aa','a@mail.com'),
+        ('b','bb','b@mail.com'),
+        ('c','cc','c@mail.com'),
+        ('e','ee','e@mail.com'),
+        ('e','ee','e@mail.com'),
+        ('f','ff','f@mail.com'),
+        ('f','ff','f@mail.com');
+
+
 
 
 
