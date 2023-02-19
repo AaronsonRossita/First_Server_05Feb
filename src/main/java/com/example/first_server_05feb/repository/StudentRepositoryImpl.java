@@ -2,8 +2,11 @@ package com.example.first_server_05feb.repository;
 
 import com.example.first_server_05feb.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class StudentRepositoryImpl implements StudentRepository {
@@ -38,5 +41,26 @@ public class StudentRepositoryImpl implements StudentRepository {
                             student.getLastName(),
                             student.getEmail(),
                             student.getId());
+    }
+
+    @Override
+    public List<String> getStudentEmailByName(String name) {
+        String sql = String.format("SELECT email FROM %s WHERE first_name=?",STUDENT_TABLE_NAME);
+        try{
+            System.out.println(jdbcTemplate.queryForList(sql, String.class, name));
+            return jdbcTemplate.queryForList(sql, String.class, name);
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
+    @Override
+    public List<Integer> getAllId() {
+        String sql = String.format("SELECT id FROM %s",STUDENT_TABLE_NAME);
+        try{
+            return jdbcTemplate.queryForList(sql,Integer.class);
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
     }
 }

@@ -11,13 +11,15 @@ public class Customer {
     @JsonProperty(value = "last_name")
     private String lastName;
     private String email;
+    private CustomerStatus status;
 
 
-    public Customer(int id, String firstName, String lastName, String email) {
+    public Customer(int id, String firstName, String lastName, String email, CustomerStatus status) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.status = status;
     }
 
     public int getId() {
@@ -50,5 +52,13 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public CustomerStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CustomerStatus status) {
+        this.status = status;
     }
 }

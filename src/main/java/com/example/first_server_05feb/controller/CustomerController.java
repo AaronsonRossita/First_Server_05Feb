@@ -1,7 +1,7 @@
 package com.example.first_server_05feb.controller;
 
 import com.example.first_server_05feb.model.Customer;
-import com.example.first_server_05feb.repository.CustomerRepositoryImpl;
+import com.example.first_server_05feb.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -9,40 +9,41 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping( value = "/customer")
 public class CustomerController {
 
     @Autowired
-    CustomerRepositoryImpl repository;
+    CustomerService service;
 
-    @PostMapping(value = "/customer/create")
-    @ResponseStatus(code = HttpStatus.CREATED, reason = "OK")
-    public void postCustomer(@RequestBody Customer customer){
-        repository.postCustomer(customer);
+    @PostMapping(value = "/create")
+//    @ResponseStatus(code = HttpStatus.CREATED, reason = "OK")
+    public String postCustomer(@RequestBody Customer customer){
+        return service.postCustomer(customer);
     }
 
-    @DeleteMapping(value = "/customer/delete")
+    @DeleteMapping(value = "/delete")
     public void deleteCustomer (@RequestParam int id){
-        repository.deleteCustomerById(id);
+        service.deleteCustomerById(id);
     }
 
-    @PutMapping(value = "/customer/update")
+    @PutMapping(value = "/update")
     public void update (@RequestBody Customer customer){
-        repository.updateCustomer(customer);
+        service.updateCustomer(customer);
     }
 
-    @GetMapping(value = "/customer")
+    @GetMapping
     public List<Customer> getAllCustomers(){
-        return repository.getAllCustomers();
+        return service.getAllCustomers();
     }
 
-    @GetMapping(value = "/customer", params = "name")
+    @GetMapping(params = "name")
     public List<Customer> getCustomerById(@RequestParam String name){
-        return repository.getCustomerByName(name);
+        return service.getCustomerByName(name);
     }
 
-    @GetMapping(value = "/customer", params = "id")
+    @GetMapping(params = "id")
     public Customer getCustomerById(@RequestParam int id){
-        return repository.getCustomerById(id);
+        return service.getCustomerById(id);
     }
 
 }

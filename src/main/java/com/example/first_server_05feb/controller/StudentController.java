@@ -5,6 +5,8 @@ import com.example.first_server_05feb.repository.StudentRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class StudentController {
 
@@ -30,5 +32,15 @@ public class StudentController {
 //    void deleteStudent(@PathVariable int id){
 //        repository.deleteStudent(id);
 //    }
+
+    @GetMapping(value = "/student/email")
+    List<String> getStudentEmailByName(@RequestParam String name){
+        return repository.getStudentEmailByName(name);
+    }
+
+    @GetMapping(value = "/student/id")
+    List<Integer> getAllId(){
+        return repository.getAllId();
+    }
 
 }
