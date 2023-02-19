@@ -44,8 +44,8 @@ public class CustomerRepositoryImpl implements CustomerRepository{
                             customer.getFirstName(),
                             customer.getLastName(),
                             customer.getEmail(),
-                            customer.getId(),
-                            customer.getStatus().name());
+                            customer.getStatus().name(),
+                            customer.getId());
     }
 
 

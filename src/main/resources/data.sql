@@ -25,18 +25,28 @@ CREATE TABLE student(
     first_name varchar(300) NOT NULL DEFAULT '',
     last_name varchar(300) NOT NULL DEFAULT '',
     email varchar(300) NOT NULL DEFAULT '',
+    payment_method varchar(300) NOT NULL DEFAULT 'CC',
     PRIMARY KEY (id)
 );
 
-INSERT INTO customer (first_name, last_name, email)
-VALUES ('a','aa','a@mail.com'),
-        ('b','bb','b@mail.com'),
-        ('c','cc','c@mail.com'),
-        ('e','ee','e@mail.com'),
-        ('e','ee','e@mail.com'),
-        ('f','ff','f@mail.com'),
-        ('f','ff','f@mail.com');
+INSERT INTO customer (first_name, last_name, email, status)
+VALUES ('a','aa','a@mail.com','VIP'),
+        ('b','bb','b@mail.com','VIP'),
+        ('c','cc','c@mail.com','VIP'),
+        ('e','ee','e@mail.com','VIP'),
+        ('e','ee','e@mail.com','VIP'),
+        ('f','ff','f@mail.com','VIP'),
+        ('f','ff','f@mail.com','VIP');
 
+
+INSERT INTO student (first_name, last_name, email, payment_method)
+VALUES ('a','aa','a@mail.com','CC'),
+        ('b','bb','b@mail.com','CASH'),
+        ('c','cc','c@mail.com','VOUCHER'),
+        ('e','ee','e@mail.com','CHECK'),
+        ('e','ee','e@mail.com','CC'),
+        ('f','ff','f@mail.com','CC'),
+        ('f','ff','f@mail.com','VOUCHER');
 
 
 

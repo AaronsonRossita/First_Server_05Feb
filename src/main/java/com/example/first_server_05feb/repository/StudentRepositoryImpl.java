@@ -19,11 +19,12 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void createStudent(Student student) {
-        String sql = String.format("INSERT INTO %s (first_name, last_name, email) VALUES (?,?,?)",STUDENT_TABLE_NAME);
+        String sql = String.format("INSERT INTO %s (first_name, last_name, email, payment_method) VALUES (?,?,?,?)",STUDENT_TABLE_NAME);
         jdbcTemplate.update(sql,
                             student.getFirstName(),
                             student.getLastName(),
-                            student.getEmail());
+                            student.getEmail(),
+                            student.getPaymentMethod().name());
     }
 
     @Override
@@ -35,11 +36,12 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void updateStudent(Student student) {
-        String sql = String.format("UPDATE %s SET first_name=?, last_name=?, email=? WHERE id=?",STUDENT_TABLE_NAME);
+        String sql = String.format("UPDATE %s SET first_name=?, last_name=?, email=?, payment_method=?  WHERE id=?",STUDENT_TABLE_NAME);
         jdbcTemplate.update(sql,
                             student.getFirstName(),
                             student.getLastName(),
                             student.getEmail(),
+                            student.getPaymentMethod().name(),
                             student.getId());
     }
 

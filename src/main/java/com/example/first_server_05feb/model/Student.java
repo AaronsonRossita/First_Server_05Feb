@@ -10,14 +10,15 @@ public class Student {
     @JsonProperty(value = "last_name")
     private String lastName;
     private String email;
+    @JsonProperty(value = "payment_method")
+    private PaymentMethod paymentMethod;
 
-
-
-    public Student(int id, String firstName, String lastName, String email) {
+    public Student(int id, String firstName, String lastName, String email, PaymentMethod paymentMethod) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.paymentMethod = paymentMethod;
     }
 
     public int getId() {
@@ -50,5 +51,13 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 }

@@ -8,7 +8,7 @@ public interface CustomerService {
 
     String postCustomer(Customer customer);
     void deleteCustomerById(int id);
-    void updateCustomer(Customer customer);
+    String updateCustomer(Customer customer);
 
     List<Customer> getAllCustomers();
     List<Customer> getCustomerByName(String name);

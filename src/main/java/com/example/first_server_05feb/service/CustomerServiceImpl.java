@@ -35,8 +35,21 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public void updateCustomer(Customer customer) {
-        repository.updateCustomer(customer);
+    public String updateCustomer(Customer customer) {
+        if (getCustomerById(customer.getId()).getStatus() == CustomerStatus.VIP){
+            repository.updateCustomer(customer);
+            return "updated";
+        }else if(customer.getStatus() == CustomerStatus.VIP){
+            if (repository.getCustomerByStatus(CustomerStatus.VIP).size() < 10){
+                repository.updateCustomer(customer);
+                return "updated";
+            }else{
+                return "can't become VIP";
+            }
+        }else{
+            repository.updateCustomer(customer);
+            return "updated";
+        }
     }
 
     @Override
