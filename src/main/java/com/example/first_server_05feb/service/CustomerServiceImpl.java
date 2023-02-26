@@ -30,7 +30,7 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public void deleteCustomerById(int id) {
+    public void deleteCustomerById(Integer id) {
         repository.deleteCustomerById(id);
     }
 
@@ -63,7 +63,7 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public Customer getCustomerById(int id) {
+    public Customer getCustomerById(Integer id) {
         return repository.getCustomerById(id);
     }
 }

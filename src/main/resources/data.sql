@@ -4,10 +4,10 @@ DROP TABLE IF EXISTS student;
 
 CREATE TABLE customer(
     id int NOT NULL AUTO_INCREMENT,
-    first_name varchar(300) NOT NULL DEFAULT '',
-    last_name varchar(300) NOT NULL DEFAULT '',
-    email varchar(300) NOT NULL DEFAULT '',
-    status varchar(300) NOT NULL DEFAULT 'REGULAR',
+    first_name varchar(300) DEFAULT '',
+    last_name varchar(300) DEFAULT '',
+    email varchar(300) DEFAULT '',
+    status varchar(300) DEFAULT 'REGULAR',
     PRIMARY KEY (id)
 );
 

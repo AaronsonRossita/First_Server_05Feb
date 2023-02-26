@@ -9,12 +9,12 @@ import java.util.List;
 public interface CustomerRepository {
 
     void postCustomer(Customer customer);
-    void deleteCustomerById(int id);
+    void deleteCustomerById(Integer id);
     void updateCustomer(Customer customer);
 
     List<Customer> getAllCustomers();
     List<Customer> getCustomerByName(String name);
-    Customer getCustomerById(int id);
+    Customer getCustomerById(Integer id);
 
     List<Customer> getCustomerByStatus(CustomerStatus status);
 

@@ -12,11 +12,29 @@ public class CustomerOrderServiceImpl implements CustomerOrderService{
 
     @Autowired
     private CustomerOrderRepository repository;
+    @Autowired
+    private CustomerService customerService;
 
     @Override
     public CustomerOrderResponse createCustomerOrder(CustomerOrderRequest request) {
-
-        repository.createCustomerOrder(request.getOrder());
+        if (request.getCustomer() != null){
+            if (request.getCustomer().getId() != null){
+                if (request.toCustomerOrder() != null){
+                    if (customerService.getCustomerById(request.getCustomer().getId()) != null){
+                        repository.createCustomerOrder(request.toCustomerOrder());
+                    }else{
+                        customerService.postCustomer(request.getCustomer());
+                        repository.createCustomerOrder(request.toCustomerOrder());
+                    }
+                }else{
+                    System.out.println("can't create order without order");
+                }
+            }else{
+                System.out.println("can't create order without customer id");
+            }
+        }else{
+            System.out.println("can't create order without customer");
+        }
         return null;
     }
 }

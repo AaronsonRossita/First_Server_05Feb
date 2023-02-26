@@ -33,7 +33,7 @@ public class CustomerRepositoryImpl implements CustomerRepository{
     }
 
     @Override
-    public void deleteCustomerById(int id) {
+    public void deleteCustomerById(Integer id) {
         String sql = String.format("DELETE FROM %s WHERE id = ?",CUSTOMER_TABLE_NAME);
         jdbcTemplate.update(sql,id);
     }
@@ -71,7 +71,7 @@ public class CustomerRepositoryImpl implements CustomerRepository{
     }
 
     @Override
-    public Customer getCustomerById(int id) {
+    public Customer getCustomerById(Integer id) {
         String sql = String.format("SELECT * FROM %s WHERE id = ?",CUSTOMER_TABLE_NAME);
         try{
             Customer customer = jdbcTemplate.queryForObject(sql,new CustomerMapper(),id);

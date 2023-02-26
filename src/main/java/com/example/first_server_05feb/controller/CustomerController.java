@@ -22,7 +22,7 @@ public class CustomerController {
     }
 
     @DeleteMapping(value = "/delete")
-    public void deleteCustomer (@RequestParam int id){
+    public void deleteCustomer (@RequestParam Integer id){
         service.deleteCustomerById(id);
     }
 
@@ -42,7 +42,7 @@ public class CustomerController {
     }
 
     @GetMapping(params = "id")
-    public Customer getCustomerById(@RequestParam int id){
+    public Customer getCustomerById(@RequestParam Integer id){
         return service.getCustomerById(id);
     }
 
