@@ -13,7 +13,7 @@ import java.util.List;
 public class CustomerController {
 
     @Autowired
-    CustomerService service;
+    private CustomerService service;
 
     @PostMapping(value = "/create")
 //    @ResponseStatus(code = HttpStatus.CREATED, reason = "OK")
@@ -37,7 +37,7 @@ public class CustomerController {
     }
 
     @GetMapping(params = "name")
-    public List<Customer> getCustomerById(@RequestParam String name){
+    public List<Customer> getCustomerByName(@RequestParam String name){
         return service.getCustomerByName(name);
     }
 

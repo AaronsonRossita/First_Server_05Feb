@@ -1,6 +1,8 @@
 package com.example.first_server_05feb.repository;
 
+import com.example.first_server_05feb.model.PaymentMethod;
 import com.example.first_server_05feb.model.Student;
+import com.example.first_server_05feb.repository.mapper.StudentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,9 +15,8 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     private static final String STUDENT_TABLE_NAME = "student";
 
-
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public void createStudent(Student student) {
@@ -46,6 +47,16 @@ public class StudentRepositoryImpl implements StudentRepository {
     }
 
     @Override
+    public Student getStudentById(int id) {
+        String sql = String.format("SELECT * FROM %s WHERE id = ?", STUDENT_TABLE_NAME);
+        try{
+            return jdbcTemplate.queryForObject(sql, new StudentMapper(),id);
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
+    @Override
     public List<String> getStudentEmailByName(String name) {
         String sql = String.format("SELECT email FROM %s WHERE first_name=?",STUDENT_TABLE_NAME);
         try{
@@ -61,6 +72,16 @@ public class StudentRepositoryImpl implements StudentRepository {
         String sql = String.format("SELECT id FROM %s",STUDENT_TABLE_NAME);
         try{
             return jdbcTemplate.queryForList(sql,Integer.class);
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
+    @Override
+    public List<Student> getStudentsByPaymentMethod(PaymentMethod method) {
+        String sql = String.format("SELECT * FROM %s WHERE payment_method = ?",STUDENT_TABLE_NAME);
+        try{
+            return jdbcTemplate.query(sql, new StudentMapper(), method.name());
         }catch (EmptyResultDataAccessException e){
             return null;
         }

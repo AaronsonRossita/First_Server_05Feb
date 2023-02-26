@@ -45,7 +45,7 @@ VALUES ('a','aa','a@mail.com','CC'),
         ('c','cc','c@mail.com','VOUCHER'),
         ('e','ee','e@mail.com','CHECK'),
         ('e','ee','e@mail.com','CC'),
-        ('f','ff','f@mail.com','CC'),
+        ('f','ff','f@mail.com','VOUCHER'),
         ('f','ff','f@mail.com','VOUCHER');
 
 

@@ -2,6 +2,7 @@ package com.example.first_server_05feb.repository;
 
 import com.example.first_server_05feb.model.Customer;
 import com.example.first_server_05feb.model.CustomerStatus;
+import com.example.first_server_05feb.model.Student;
 import com.example.first_server_05feb.repository.mapper.CustomerMapper;
 import com.example.first_server_05feb.repository.mapper.StudentMapper;
 import org.springframework.beans.factory.annotation.Autowired;

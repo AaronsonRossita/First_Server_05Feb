@@ -12,7 +12,7 @@ import java.util.List;
 public class CustomerServiceImpl implements CustomerService{
 
     @Autowired
-    CustomerRepository repository;
+    private CustomerRepository repository;
 
     @Override
     public String postCustomer(Customer customer) {

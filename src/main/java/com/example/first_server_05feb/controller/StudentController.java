@@ -2,6 +2,7 @@ package com.example.first_server_05feb.controller;
 
 import com.example.first_server_05feb.model.Student;
 import com.example.first_server_05feb.repository.StudentRepositoryImpl;
+import com.example.first_server_05feb.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,21 +12,31 @@ import java.util.List;
 public class StudentController {
 
     @Autowired
-    StudentRepositoryImpl repository;
+    private StudentService service;
 
     @PostMapping(value = "/student/create")
     void createStudent(@RequestBody Student student){
-        repository.createStudent(student);
+        try{
+            service.createStudent(student);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
     @PutMapping(value = "/student/update")
     void updateStudent(@RequestBody Student student){
-        repository.updateStudent(student);
+        try{
+            service.updateStudent(student);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
     @DeleteMapping(value = "/student/delete")
     void deleteStudent(@RequestParam int id){
-        repository.deleteStudent(id);
+        service.deleteStudent(id);
     }
 
 //    @DeleteMapping(value = "/student/delete/{id}")
@@ -35,12 +46,12 @@ public class StudentController {
 
     @GetMapping(value = "/student/email")
     List<String> getStudentEmailByName(@RequestParam String name){
-        return repository.getStudentEmailByName(name);
+        return service.getStudentEmailByName(name);
     }
 
     @GetMapping(value = "/student/id")
     List<Integer> getAllId(){
-        return repository.getAllId();
+        return service.getAllId();
     }
 
 }
