@@ -16,3 +16,5 @@ spring:
 externalApi:
   tvmaze:
     url: https://api.tvmaze.com
+  lastfm:
+    url: http://ws.audioscrobbler.com/2.0
