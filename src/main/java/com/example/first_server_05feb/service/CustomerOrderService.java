@@ -6,6 +6,6 @@ import com.example.first_server_05feb.model.CustomerOrderResponse;
 
 public interface CustomerOrderService {
 
-    CustomerOrderResponse createCustomerOrder(CustomerOrderRequest request);
+    CustomerOrderResponse createCustomerOrder(CustomerOrderRequest request) throws Exception;
 
 }

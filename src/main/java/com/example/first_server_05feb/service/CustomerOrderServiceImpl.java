@@ -1,11 +1,14 @@
 package com.example.first_server_05feb.service;
 
+import com.example.first_server_05feb.model.Customer;
 import com.example.first_server_05feb.model.CustomerOrder;
 import com.example.first_server_05feb.model.CustomerOrderRequest;
 import com.example.first_server_05feb.model.CustomerOrderResponse;
 import com.example.first_server_05feb.repository.CustomerOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CustomerOrderServiceImpl implements CustomerOrderService{
@@ -16,7 +19,7 @@ public class CustomerOrderServiceImpl implements CustomerOrderService{
     private CustomerService customerService;
 
     @Override
-    public CustomerOrderResponse createCustomerOrder(CustomerOrderRequest request) {
+    public CustomerOrderResponse createCustomerOrder(CustomerOrderRequest request) throws Exception{
         if (request.getCustomer() != null){
             if (request.getCustomer().getId() != null){
                 if (request.toCustomerOrder() != null){
@@ -26,15 +29,18 @@ public class CustomerOrderServiceImpl implements CustomerOrderService{
                         customerService.postCustomer(request.getCustomer());
                         repository.createCustomerOrder(request.toCustomerOrder());
                     }
+                    Customer customer = customerService.getCustomerById(request.getCustomer().getId());
+                    List<CustomerOrder> orders = repository.getCustomerOrdersById(customer.getId());
+                    CustomerOrderResponse response = new CustomerOrderResponse(customer,orders);
+                    return response;
                 }else{
-                    System.out.println("can't create order without order");
+                    throw new Exception("can't create order without order");
                 }
             }else{
-                System.out.println("can't create order without customer id");
+                throw new Exception("can't create order without customer id");
             }
         }else{
-            System.out.println("can't create order without customer");
+            throw new Exception("can't create order without customer");
         }
-        return null;
     }
 }
