@@ -14,7 +14,7 @@ import java.util.List;
 public class CustomerOrderServiceImpl implements CustomerOrderService{
 
     @Autowired
-    private CustomerOrderRepository repository;
+    private CustomerOrderRepository  repository;
     @Autowired
     private CustomerService customerService;
 
@@ -42,5 +42,27 @@ public class CustomerOrderServiceImpl implements CustomerOrderService{
         }else{
             throw new Exception("can't create order without customer");
         }
+    }
+
+    @Override
+    public CustomerOrderResponse updateCustomerOrder(CustomerOrder order) {
+        repository.updateCustomerOrder(order);
+        Integer customerId = repository.getOrderById(order.getId()).getCustomerId();
+        return order.toCustomerOrderResponse(customerService.getCustomerById(customerId),repository.getCustomerOrdersById(customerId));
+    }
+
+    @Override
+    public CustomerOrder getOrderById(Integer id) {
+        return repository.getOrderById(id);
+    }
+
+    @Override
+    public void deleteOrderById(Integer id) {
+        repository.deleteOrderById(id);
+    }
+
+    @Override
+    public void deleteAllCustomerOrders(Integer customerId) {
+        repository.deleteAllCustomerOrders(customerId);
     }
 }

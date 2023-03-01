@@ -22,12 +22,22 @@ public class CustomerOrderController {
 
     @PutMapping(value = "/update")
     public CustomerOrderResponse updateOrder(@RequestBody CustomerOrder order){
-        return null;
+        return service.updateCustomerOrder(order);
     }
 
     @GetMapping(value = "/id")
     public CustomerOrder getOrderById(@RequestParam Integer id){
-        return null;
+        return service.getOrderById(id);
+    }
+
+    @DeleteMapping(value = "/delete", params = "id")
+    public void deleteOrderById(@RequestParam Integer id){
+        service.deleteOrderById(id);
+    }
+
+    @DeleteMapping(value = "/delete", params = "customer_id")
+    public void deleteAllCustomerOrders(@RequestParam(value = "customer_id") Integer id){
+        service.deleteAllCustomerOrders(id);
     }
 
 

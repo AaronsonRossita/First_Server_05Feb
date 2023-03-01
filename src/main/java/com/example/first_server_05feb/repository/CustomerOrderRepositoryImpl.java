@@ -23,10 +23,39 @@ public class CustomerOrderRepositoryImpl implements CustomerOrderRepository {
     }
 
     @Override
+    public void updateCustomerOrder(CustomerOrder order) {
+        String sql = String.format("UPDATE %s SET item_name = ?, price = ? WHERE id = ?",ORDER_TABLE);
+        jdbcTemplate.update(sql,
+                            order.getItemName(),
+                            order.getPrice(),
+                            order.getId());
+    }
+
+    @Override
+    public CustomerOrder getOrderById(Integer id) {
+        String sql = String.format("SELECT * FROM %s WHERE id = ?", ORDER_TABLE);
+        return jdbcTemplate.queryForObject(sql, new CustomerOrderMapper(),id);
+    }
+
+    @Override
+    public void deleteOrderById(Integer id) {
+        String sql = String.format("DELETE FROM %s WHERE id = ?",ORDER_TABLE);
+        jdbcTemplate.update(sql,id);
+    }
+
+    @Override
+    public void deleteAllCustomerOrders(Integer customerId) {
+        String sql = String.format("DELETE FROM %s WHERE customer_id = ?",ORDER_TABLE);
+        jdbcTemplate.update(sql,customerId);
+    }
+
+    @Override
     public List<CustomerOrder> getCustomerOrdersById(Integer id) {
         String sql = String.format("SELECT * FROM %s WHERE customer_id=?",ORDER_TABLE);
         return jdbcTemplate.query(sql,new CustomerOrderMapper(),id);
     }
+
+
 
 
 }

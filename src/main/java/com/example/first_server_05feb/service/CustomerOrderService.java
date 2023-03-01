@@ -8,4 +8,9 @@ public interface CustomerOrderService {
 
     CustomerOrderResponse createCustomerOrder(CustomerOrderRequest request) throws Exception;
 
+    CustomerOrderResponse updateCustomerOrder(CustomerOrder order);
+    CustomerOrder getOrderById(Integer id);
+    void deleteOrderById(Integer id);
+    void deleteAllCustomerOrders(Integer customerId);
+
 }
